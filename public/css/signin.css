@@ -1,0 +1,174 @@
+:root {
+    --primary-color: #4f52ff;
+    --secondary-color: #f9f9f9;
+    --headline: #7686bc;
+    --background: #f9f9f9;
+    --text-link: #424662;
+    --cta-text: #1C2035;
+    --link-btn: #DCDCFF;
+}
+
+#signin-box{
+    background-color: var(--headline);
+    border-radius: 15px;
+    grid-column: 5/9;
+    align-content: center;
+    padding: 25px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap:10px;
+}
+#register-box{
+    background-color: var(--headline);
+    border-radius: 15px;
+    grid-column: 5/9;
+    grid-row: 1/2;
+    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 25px;
+}
+.signin-h1{
+    grid-column: 1/6;
+    grid-row: 1/2;
+    text-align: center;
+    margin: 10px;
+}
+.input-block-signin{
+    grid-column: 1/6;
+    margin: 10px 0px;
+
+}
+.signin-vert-line{
+    grid-column:1/6;
+    grid-row: 2/3;
+    height: 2px;
+    background-color: var(--secondary-color);
+    margin-bottom:15px;
+
+}
+#email{
+    grid-column: 1/5;
+    gap: 10px;
+    margin: 10px;
+    align-self: center;
+}
+#password{
+    grid-column: 1/5;
+    gap: 10px;
+    margin: 10px;
+    align-self: center;
+}
+#signin-button{
+    grid-column: 1/5;
+    gap: 10px;
+    margin: 10px;
+    align-self: center;
+}
+#email-register{
+    gap: 10px;
+    margin: 10px;
+    align-self: center;
+}
+#firstName-register{
+    gap: 10px;
+    margin: 10px;
+    align-self: center;
+}
+#lastName-register{
+    gap: 10px;
+    margin: 10px;
+    align-self: center;
+}
+#password-register{
+    gap: 10px;
+    margin: 10px;
+    align-self: center;
+}
+#register-button{
+    grid-column: 2/5;
+    gap: 10px;
+    margin: 10px;
+    align-self: center;
+}
+#username-register{
+    gap: 10px;
+    margin: 10px;
+    align-self: center;
+}
+#confirm-password{
+    gap: 10px;
+    margin: 10px;
+    align-self: center;
+}
+#signin-button{
+    grid-column: 2/5;
+    grid-row:6/7;
+    gap: 10px;
+    margin: 10px;
+    align-self: center;
+}
+#email-signin{
+    gap: 10px;
+    margin: 10px;
+    align-self: center;
+}
+#password-signin{
+    gap: 10px;
+    margin: 10px;
+    align-self: center;
+}
+span.placeholder{
+    top:9px !important;
+    left:35px !important;
+}
+div.input-block input:valid + span.placeholder,
+div.input-block input:focus + span.placeholder {
+    transform: scale(0.8) translateY(-35px) !important;
+    background: var(--secondary-color);
+    padding:5px;
+    letter-spacing: 0em;
+}
+.link-btn{
+         /* on hover underline text */
+    padding: 0px;
+    display: inline-flex;
+    appearance: none;
+    background: transparent;
+    text-transform: none;
+    height: auto;
+    color: var(--link-btn);
+    font-size: 1.2rem;
+    font-weight: 500;
+    justify-content: center;
+    border:none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+.link-btn:hover{
+    text-decoration: underline;
+}
+.link-text{
+    color: var(--secondary-color);
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    text-align: center;
+}
+#signin-link{
+    grid-row:7/8;
+    grid-column: 1/6;
+}
+#register-link{
+    grid-row:10/11;
+    grid-column: 1/6;
+}
+.link-href{
+    /* on hover underline text */
+    text-decoration: none;
+    color: var(--text-link);
+
+}

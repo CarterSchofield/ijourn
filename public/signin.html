@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IJourn</title>
+    <!-- <link rel="icon" href="images/favicon.ico"> -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/signin.css">
+</head>
+
+<body>
+    <div id="app">
+      <header>
+
+          <nav class="navbar visible">
+            <a href="index.html" class="logo">IJourn</a>
+              <div class="nav-items">
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Features</a>
+                <a href="index.html">BACK</a>
+                </div>
+          </nav>
+        </header>
+        
+          <!-- Sign In Area -->
+        <div id="testerdiv">
+          <div v-if="toggleSignInRegister">
+            <main>
+            <div id="signin-box">
+                <h1 class="header-text header-h1 signin-h1">Sign In</h1>
+                <div class="vert-line signin-vert-line"></div>
+
+                  <div class="input-block input-block-signin">
+                    <input type="text" id="email-signin" required spellcheck="false" v-model="existingUserEmail">
+                    <span class="placeholder" v-bind:style="errorStyleForField('existingUserEmail')">
+                    Email
+                    </span>
+                  </div>
+
+                  <div class="input-block input-block-signin">
+                    <input type="text" id="password-signin" required spellcheck="false" v-model="existingUserPassword">
+                    <span class="placeholder" v-bind:style="errorStyleForField('existingUserPassword')">
+                    Password
+                    </span>
+                  </div>
+
+                  <button @click="signIn" type="button" class="primary-button" id="signin-button">Sign In</button>
+
+                  <p class="link-text" id="signin-link">Don't have an account?
+                    <!-- <a href="signin.html" class="link-href"> -->
+                    <button @click="registerPopup" type="button" class="link-btn">Create on here!</button>
+                    <!-- </a> -->
+                  </p>
+
+            </div>
+            </main>
+            
+          </div>
+          <div v-else>
+            <!-- Register Area -->
+            <main>
+              <div id="register-box">
+                <h1 class="header-text header-h1 signin-h1">Create An Account</h1>
+                <div class="vert-line signin-vert-line"></div>
+
+                <div class="input-block input-block-signin">
+                  <input type="text" id="firstName-register" required spellcheck="false" v-model="newUserFirstName">
+                  <span class="placeholder" v-bind:style="errorStyleForField('newUserFirstName')">
+                  First Name
+                  </span>
+                </div>
+
+                <div class="input-block input-block-signin">
+                  <input type="text" id="lastName-register" required spellcheck="false" v-model="newUserLastName">
+                  <span class="placeholder" v-bind:style="errorStyleForField('newUserLastName')">
+                  Last Name
+                  </span>
+                </div>
+
+                <div class="input-block input-block-signin">
+                  <input type="text" id="email-register" required spellcheck="false" v-model="newUserEmail">
+                  <span class="placeholder" v-bind:style="errorStyleForField('newUserEmail')">
+                  Email
+                  </span>
+                </div>
+
+                <div class="input-block input-block-signin">
+                  <input type="text" id="username-register" required spellcheck="false" v-model="newUserUsername">
+                  <span class="placeholder" v-bind:style="errorStyleForField('newUserUsername')">
+                  Username
+                  </span>
+                </div>
+
+                <div class="input-block input-block-signin">
+                  <input type="password" id="password-register" required v-model="newUserPassword">
+                  <span class="placeholder" v-bind:style="errorStyleForField('newUserPassword')">
+                  Password
+                  </span>
+                </div>
+
+                <div class="input-block input-block-signin">
+                  <input type="password" id="confirm-password" required v-model="confirmNewUserPassword">
+                  <span class="placeholder" v-bind:style="errorStyleForField('newUserPasswordMatch')">
+                  Confirm Password
+                  </span>
+                </div>
+
+                <button @click="registerNewUser" type="submit" class="primary-button" id="register-button">Create Account</button>
+
+                <p class="link-text" id="register-link">Already have an account?
+                  <!-- <a href="signin.html" class="link-href"> -->
+                  <button @click="signInPopup" type="button" class="link-btn">Sign In!</button>
+                  <!-- </a> -->
+                </p>
+              </div>
+            </main>
+          </div>
+        </div>
+
+        
+        <footer>
+            <!-- Footer content goes here -->
+        </footer>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="javascript/app.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="javascript/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IJourn</title>
+    <!-- <link rel="icon" href="images/favicon.ico"> -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/signin.css"> -->
+</head>
+
+<body>
+    <div id="app">
+      <header>
+
+          <nav class="navbar visible">
+            <a href="index.html" class="logo">IJourn</a>
+              <div class="nav-items">
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Features</a>
+                <div v-if="userNotSignedIn" class="signInBtns">
+                  <a href="signin.html" class="secondary-button">Sign In</a>
+                  <a href="signin.html" @click="registerPopup" class="primary-button primary-button-nav">Create An Account</a>
+                </div>
+                <div v-else>
+                  <a href="dashboard.html">Dashboard</a>
+                  <button @click="deleteSession" class="secondary-button" id="signedOut">Sign Out</button>
+                </div>
+              </div>
+          </nav>
+        </header>
+        <main>
+            <h1 class="header-text header-h1">Transform Your Mindfulness and Personal Growth Journey Today.</h1>
+            <h2 class="header-text header-h2">Expressive writing through journaling can be a powerful way to process stress, trauma, or any other emotion.</h2>
+            <img src="images/hero-image.jpg" alt="Hero Image" class="hero-img header-img">
+            <button class="header-btn secondary-button">Begin Your Personal Journey</button>
+
+
+          <h1 class="body-h1">How Journaling Can Help Everyone</h1>
+          <div id="benefits-div">
+            <section id="b-1" class="benefits">
+              <h2>Achieving Goals</h2>
+              <p>Using your journal to document your goals allows for more precise tracking of your intentions, aiding in accountability and serving as a constant reminder of the actions required to achieve your objectives</p>
+            </section>
+            <section id="b-2" class="benefits">
+              <h2>Reduce stress and anxiety</h2>
+              <p>Negative thoughts can often loop in our minds, worsening stressful situations. Writing these emotions down can help clear your mind and may even reveal new solutions.</p>
+            </section>
+            <section id="b-3" class="benefits">
+              <h2>Tracking Personal Progress and Growth</h2>
+              <p>Making journaling a consistent practice enables you to observe your progress or growth over time by looking back at past entries.</p>
+            </section>
+          </div>
+
+          <div id="unique-feat-headers">
+            <h1 class="body-h1">Unique Features</h1>
+            <h2 class="body-h2">Discover the unique features we've crafted to enrich your mindfulness and personal growth journey.</h2>
+          </div>
+          <div id="features-div">
+            <section id="f-1" class="features">
+              <h2>Customizable Templates</h2>
+              <p>Choose from a variety of templates to suit your journaling needs, including daily, weekly, and monthly prompts.</p>
+            </section>
+            <section id="f-2" class="features">
+              <h2>Secure and Private</h2>
+              <p>Our platform is designed with your privacy in mind. Your journal entries are encrypted and only accessible by you.</p>
+            </section>
+            <section id="f-3" class="features">
+              <h2>Community Support</h2>
+              <p>Connect with other users to share your experiences, offer support, and gain inspiration from others on their personal growth journey.</p>
+            </section>
+          </div>
+        </main>
+        </div>
+
+        <footer>
+            <!-- Footer content goes here -->
+        </footer>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="javascript/app.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="javascript/main.js"></script>
+</body>
+</html>

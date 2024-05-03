@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IJourn</title>
+    <!-- <link rel="icon" href="images/favicon.ico"> -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/signin.css"> -->
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <nav class="navbar visible">
+                <a href="index.html" class="logo">IJourn</a>
+                <div class="nav-items">
+                    <a href="index.html">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Features</a>
+                    <button @click="deleteSession" class="secondary-button" id="signedOut">Sign Out</button>
+                </div>
+            </nav>
+        </header>
+
+        <div class="signedInContainer">
+            <aside class="sidebar">
+            <div class="menu-btn">
+                <img src="images/menu-icon.svg" alt="Menu Icon" class="menu-icon">
+            </div>
+            <div class="sidebar-profile">
+                <!-- <img src="images/profile-pic.jpg" alt="Profile Picture" class="profile-pic"> -->
+                <h2 class="sidebar-h2">Welcome Back!<!--{{ user.displayName }}--></h2>
+            </div>
+            <div class="sidebar-links">
+                <h2>Main</h2>
+                <ul>
+            <li>
+                    <a title="Home" class="tooltip" @click="showNewJournal">
+                    <img src="images/home-icon.svg" alt="Home Icon" class="sidebar-icon">
+                    <span class="link hide">Home</span>
+                    <span class="tooltip-content">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a title="Past Entries" class="tooltip" @click="cancelJournal">
+                    <img src="images/journal-icon.svg" alt="Journal Icon" class="sidebar-icon">
+                    <span class="link hide">Past Entries</span>
+                    <span class="tooltip-content">Past Entries</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="Community" class="tooltip" @click="communityJournalsSwitcher">
+                    <img src="images/community-icon.svg" alt="Community Icon" class="sidebar-icon">
+                    <span class="link hide">Community</span>
+                    <span class="tooltip-content">Community</span>
+                    </a>
+                </li>
+                </ul>
+            </aside>
+            <div v-if="showUserNewEntry" class="journal-container">
+            <h1 class="dashB-h1">My Journal</h1>
+            <div class="vert-line"></div>
+            <div id="review-inputs">
+                <div class="input-block username-input">
+                    <input type="text" name="input-text" id="input-text" required spellcheck="false" v-model="username">
+                    
+                    <span class="placeholder" v-bind:style="errorStyleForField('username')">
+                    Username
+                    </span>
+                    <div v-bind:style="errorStyleForField('username')">
+                    {{ errorMessages.username }}
+                </div>
+                </div>
+                <!-- This will add a red error underneath -->
+                
+                <br>
+                <div class="input-block enterytitle-input">
+                    <input type="text" name="input-text" id="input-text" required spellcheck="false" v-model="newEntryTitle">
+                    <span class="placeholder" v-bind:style="errorStyleForField('newEntryTitle')">
+                    Entry Title
+                    </span>
+                    <div v-bind:style="errorStyleForField('newEntryTitle')">
+                    {{ errorMessages.newEntryTitle }}
+                </div>
+                </div>
+                <br>
+                <div class="input-block entry-input">
+                    <textarea type="text" name="input-text" id="input-text" required spellcheck="true" v-model="newJournalEntry">
+                    <span class="placeholder" v-bind:style="errorStyleForField('newJournalEntry')">
+                    Journal Entry
+                    </span>
+                    </textarea>
+                    <div v-bind:style="errorStyleForField('newJournalEntry')">
+                    {{ errorMessages.newJournalEntry }}
+                </div>
+                </div>
+                <br>
+                <div class="input-block mood-input">
+                    <input type="number" name="input-text" id="input-text" required spellcheck="false" v-model="newMoodRating" min="1" max="5">
+                    <span class="placeholder" v-bind:style="errorStyleForField('newMoodRating')">
+                    Mood Rating (1-5)
+                    </span>
+                    <div v-bind:style="errorStyleForField('newMoodRating')">
+                    {{ errorMessages.newMoodRating }}
+                </div>
+            </div>
+            </div>
+            <button v-on:click="addJournalEntry" id="addCustomerButton" class="secondary-button">Add Journal Entry</button>
+            </div>
+            <div v-else class="journal-container">
+            <h1 class="dashB-h1">Past Journal Entries</h1>
+            <div class="vert-line"></div>
+            <div class="past-journal-entries">
+                <ul>
+                <li v-for="journal in journals" :key="journal._id">
+                    <div class="journal-item">
+                        <p class="display-username"><strong>Username:</strong> {{ journal.username }}</p>
+                        <p class="display-title"><strong>Entry Title:</strong> {{ journal.entryTitle }}</p>
+                        <p class="display-date"><strong>Entry Date:</strong> {{ journal.entryDate }}</p>
+                        <p class="display-time"><strong>Entry Time:</strong> {{ journal.entryTime }}</p>
+                        <p class="display-mood"><strong>Mood Rating:</strong> {{ journal.moodRating }}</p>
+                        <p class="display-public"><strong>Public:</strong> {{ journal.public ? 'Yes' : 'No' }}</p>
+                        <p class="display-body"><strong>Entry Body:</strong> {{ journal.entryBody }}</p>
+                        <button class="primary-button deleteJournalBtn" @click="deleteJournalEntry(journal._id)">Remove Entry</button>
+                        <button class="editJournalBtn secondary-button" @click="editJournalEntry(journal._id)">Make Public</button>
+                        <div class="vert-line2"></div>
+                        <!-- <button @click="editJournal(journal._id)">Edit Entry</button> -->
+                    </div>
+                </li>
+            </ul>
+            </div>
+            </div>
+        </div>
+        <div v-if="communityJournalsSwitch" class="journal-container">
+            <h1 class="dashB-h1">Community Journal Entries</h1>
+            <div class="vert-line"></div>
+            <div class="past-journal-entries">
+                <ul>
+                <li v-for="journal in communityJournals" :key="journal._id">
+                    <div class="journal-item">
+                        <p class="display-username"><strong>Username:</strong> {{ journal.username }}</p>
+                        <p class="display-title"><strong>Entry Title:</strong> {{ journal.entryTitle }}</p>
+                        <p class="display-date"><strong>Entry Date:</strong> {{ journal.entryDate }}</p>
+                        <p class="display-time"><strong>Entry Time:</strong> {{ journal.entryTime }}</p>
+                        <p class="display-mood"><strong>Mood Rating:</strong> {{ journal.moodRating }}</p>
+                        <p class="display-public"><strong>Public:</strong> {{ journal.public ? 'Yes' : 'No' }}</p>
+                        <p class="display-body"><strong>Entry Body:</strong> {{ journal.entryBody }}</p>
+                        <button class="primary-button deleteJournalBtn" @click="deleteJournalEntry(journal._id)">Remove Entry</button>
+                        <button class="editJournalBtn secondary-button" @click="editJournalEntry(journal._id)">Edit Entry</button>
+                        <div class="vert-line2"></div>
+                        <!-- <button @click="editJournal(journal._id)">Edit Entry</button> -->
+                    </div>
+                </li>
+            </ul>
+            </div>
+
+        </div>
+        <footer>
+            <!-- Footer content goes here -->
+        </footer>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="javascript/app.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="javascript/main.js"></script>
+</body>
+</html>
