@@ -65,51 +65,6 @@ function getSignedInUser(request, response, next) {
     }
 }
 
-// function authorizeRequest(request, response, next) {
-//     if (request.session && request.session.userId) {
-//         model.User.findOne({ _id: request.session.userId }).then(function(user) {
-//             if (user) {
-//                 request.user = user;
-//                 next();
-//             } else {
-//                 response.status(401).send("Not authenticated");
-//             }
-//         });
-//     } else {
-//         response.status(401).send("Not authenticated");
-//     }
-// }
-// function authorizeRequest(request, response, next) {
-//     if (request.session && request.session.userID){
-//         next();
-//     } else{
-//         response.status(401).send("Not authenticated");
-//     }}
-
-// function authorizeRequestHelper(adminOnly, request, response, next) {
-//     if (request.session && request.session.userID) {
-//         model.User.findOne({ _id: request.session.userID }).then(function (user) {
-//             if (user && (!adminOnly || user.admin)) {
-//                 request.user = user;
-//                 next();
-//             } else{
-//                 response.status(401).send("Not authenticated");
-//             }
-//         })
-//     } else{
-//         response.status(401).send("Not authenticated");
-//     }
-// }
-
-// function authorizeRequestNonAdmin(request, response, next) {
-//     authorizeRequestHelper(false, request, response, next);
-// }
-
-// function authorizeRequestAdmin(request, response, next) {
-//     authorizeRequestHelper(true, request, response, next);
-// }
-
-
 // GET all journal entries
 // , authorizeRequest
 app.get("/journals", authorizeRequest, function(request, response){
@@ -136,22 +91,6 @@ app.get("/journals", authorizeRequest, function(request, response){
     //     filter.public = true;
     // }
 });
-
-// app.get("/journals", authorizeRequest, function(request, response) {
-//     let filter = {};
-//     let order = { entryDate: -1 };
-
-//     // Add any filters here based on request.query parameters
-//     // For example, filter by public/private entries, specific user, etc.
-
-//     model.Journal.find(filter).sort(order).then((journals) => {
-//         console.log("Journals from database:", journals);
-//         response.json(journals);
-//     }).catch((error) => {
-//         console.error("Failed to retrieve journals:", error);
-//         response.sendStatus(500);
-//     });
-// });
 
 // GET/Retrieve a single journal entry
 app.get("/journals/:journalID", authorizeRequest, function(request, response) {
@@ -190,30 +129,6 @@ app.post("/journals", authorizeRequest, function(request, response) {
         response.sendStatus(500);
     });
 });
-
-// PUT/UPDATE a journal entry
-// app.put("/journals/:journalID", authorizeRequest, function(request, response) {
-//     console.log("Request to update journal with ID:", request.params.journalID);
-//     model.Journal.updateOne({ _id: request.params.journalID }, {
-//         username: request.body.username,
-//         entryTitle: request.body.entryTitle,
-//         entryBody: request.body.entryBody,
-//         entryDate: request.body.entryDate,
-//         entryTime: request.body.entryTime,
-//         moodRating: request.body.moodRating,
-//         public: request.body.public,
-//     }).then((result) => {
-//         if (result.nModified > 0) {
-//             response.status(200).send("Journal entry updated.");
-//         } else {
-//             response.status(404).send("Journal entry not found.");
-//             console.log("Journal entry not found.");
-//         }
-//     }).catch((error) => {
-//         console.error("Failed to update journal with ID:" + request.params.journalID, error);
-//         response.sendStatus(404);
-//     });
-// });
 
 // PUT/UPDATE a journal entry to toggle its public property
 app.put("/journals/:journalID", authorizeRequest, function(request, response) {
